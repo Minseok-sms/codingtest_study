@@ -1,0 +1,230 @@
+//import java.util.Stack;
+//
+//public class algo64 {
+//
+//
+//    static boolean[][] visited;
+//    static int[] dx = {1, 0, -1, 0};
+//    static int[] dy = {0, 1, 0, -1};
+//    static int min = Integer.MAX_VALUE;
+//    static Stack<Integer> stack = new Stack<>();
+//    static int globalCheck = 0;
+//    static boolean firstCheck = false;
+//
+//    public static void dfs(int row, int col, int n, int sum, int[][] board){
+//
+//        visited[row][col] = true;
+//        if(row == n - 1 && col == n - 1){
+//            min = Math.min(min, sum);
+//            return ;
+//        }
+//
+//
+//        for(int i = 0 ; i < 4; i++){
+//            int nextRow = row + dy[i];
+//            int nextCol = col + dx[i];
+//
+//            if(nextRow < 0 || nextRow >= n || nextCol < 0 || nextCol >= n)
+//                continue;
+//
+//            if(visited[nextRow][nextCol] == false && board[nextRow][nextCol] == 0){
+//                visited[nextRow][nextCol] = true;
+//                stack.push(i);
+//                // 만약스택에 담긴게 1개이면
+//                if(stack.size() == 1) {
+//                    dfs(nextRow, nextCol, n, sum + 100, board);
+//                }
+//                else{
+//                    int now = stack.pop();
+//                    int before = stack.pop();
+//                    stack.push(before);
+//                    stack.push(now);
+//                    if(now == before){
+//                        dfs(nextRow, nextCol, n, sum + 100, board);
+//                    }else
+//                        dfs(nextRow, nextCol, n, sum + 500 + 100, board);
+//                }
+//                stack.pop();
+//                visited[nextRow][nextCol] = false;
+//            }else{
+//                continue;
+//            }
+//
+//        }
+//    }
+//    public static int solution(int[][] board) {
+//        int answer = 0;
+//        visited = new boolean[board.length][board.length];
+//        dfs(0,0, board.length, 0, board);
+//        answer = min;
+//        return answer;
+//    }
+//    public static void main(String[] args) {
+//        int[][] board = {{0,0,0,0,0,0,0,1},{0,0,0,0,0,0,0,0},{0,0,0,0,0,1,0,0},{0,0,0,0,1,0,0,0},{0,0,0,1,0,0,0,1},{0,0,1,0,0,0,1,0},
+//               {0,1,0,0,0,1,0,0},{1,0,0,0,0,0,0,0}};
+//        //int[][] board = {{0,0,0}, {0,0,0}, {0,0,0}};
+//        System.out.println(solution(board));
+//    }
+//}
+
+//import java.util.Stack;
+//
+//public class algo64 {
+//
+//    /*
+//    경주로 건설 : dfs 시간초과
+//     */
+//
+//    static boolean[][] visited;
+//    static int[] dx = {1, 0, -1, 0};
+//    static int[] dy = {0, 1, 0, -1};
+//    static int min = Integer.MAX_VALUE;
+//    static int globalCheck = 0;
+//    static boolean firstCheck = false;
+//    static int globalCount = 0;
+//
+//    public static void dfs(int row, int col,int k, int n, int sum, int[][] board){
+//
+//        visited[row][col] = true;
+//        if(row == n - 1 && col == n - 1){
+//            min = Math.min(min, sum);
+//            return ;
+//        }
+//        for(int i = 0 ; i < 4; i++){
+//            int nextRow = row + dy[i];
+//            int nextCol = col + dx[i];
+//
+//            if(nextRow < 0 || nextRow >= n || nextCol < 0 || nextCol >= n)
+//                continue;
+//
+//            if(visited[nextRow][nextCol] == false && board[nextRow][nextCol] == 0){
+//                visited[nextRow][nextCol] = true;
+//                globalCheck = i;
+//                globalCount++;
+//                // 만약스택에 담긴게 1개이면
+//                if(globalCount == 1) {
+//                    dfs(nextRow, nextCol, i,n , sum + 100, board);
+//                }
+//                else{
+//                    if(globalCheck == k){
+//                        dfs(nextRow, nextCol, i, n, sum + 100, board);
+//                    }else
+//                        dfs(nextRow, nextCol, i, n, sum + 500 + 100, board);
+//                }
+//                globalCheck = k;
+//                globalCount--;
+//                visited[nextRow][nextCol] = false;
+//            }else{
+//                continue;
+//            }
+//
+//        }
+//    }
+//    public static int solution(int[][] board) {
+//        int answer = 0;
+//        visited = new boolean[board.length][board.length];
+//        dfs(0,0, 0, board.length,0, board);
+//        answer = min;
+//        return answer;
+//    }
+//    public static void main(String[] args) {
+//        //int[][] board = {{0,0,0,0,0,0,0,1},{0,0,0,0,0,0,0,0},{0,0,0,0,0,1,0,0},{0,0,0,0,1,0,0,0},{0,0,0,1,0,0,0,1},{0,0,1,0,0,0,1,0},
+//                //{0,1,0,0,0,1,0,0},{1,0,0,0,0,0,0,0}};
+//        //int[][] board = {{0,0,0}, {0,0,0}, {0,0,0}};
+//
+//        int[][] board = {{0,0,1,0}, {0,0,0,0}, {0,1,0,1}, {1,0,0,0}};
+//        System.out.println(solution(board));
+//    }
+//}
+//
+//import java.util.LinkedList;
+//import java.util.Queue;
+//import java.util.Stack;
+//
+//public class algo64 {
+//
+//
+//    //경주로 건설 : bfs 25번 테케 오류
+//    static Class Node{
+//        int x;
+//        int y;
+//        int value;
+//        int ivalue;
+//
+//        Node(int y, int x, int value, int ivalue) {
+//            this.x = x;
+//            this.y = y;
+//            this.value = value;
+//            this.ivalue = ivalue;
+//        }
+//    }
+//
+//    public static void bfs(int row, int col, int n, int[][] board) {
+//        Queue<Node> queue = new LinkedList<>();
+//        queue.add(new Node(row, col, 0, 0));
+//
+//
+//        //visited[row][col] = true;
+//        while (!queue.isEmpty()) {
+//            Node node = queue.poll();
+//            if (node.x == n - 1 && node.y == n - 1) {
+//                min = Math.min(min, node.value);
+//                continue;
+//            }
+//            for (int i = 0; i < 4; i++) {
+//                int nextRow = node.y + dy[i];
+//                int nextCol = node.x + dx[i];
+//
+//                if (nextRow < 0 || nextRow >= n || nextCol < 0 || nextCol >= n)
+//                    continue;
+//
+//                if (board[nextRow][nextCol] != 1) {
+//                    //visited[nextRow][nextCol] = true;
+//                   int new_cost = 0;
+//                   globalCount++;
+//                   if(globalCount <= 1 || node.ivalue == i) {
+//                        new_cost = node.value + 100;
+//                   }else
+//                       new_cost = node.value + 600;
+//
+//                   if(board[nextRow][nextCol] == 0) {
+//                       board[nextRow][nextCol] = new_cost;
+//                       queue.add(new Node(nextRow,nextCol,new_cost, i));
+//                   }else if(board[nextRow][nextCol] >= new_cost) {
+//                        board[nextRow][nextCol] = new_cost;
+//                        queue.add(new Node(nextRow, nextCol, new_cost, i));
+//                   }
+//                } else {
+//                    continue;
+//                }
+//
+//            }
+//
+//        }
+//    }
+//
+//    public static int solution(int[][] board) {
+//        int answer = 0;
+//        visited = new boolean[board.length][board.length];
+//
+//        if(board[0][1] == 0 && board[1][0] == 0)
+//            globalCount = -1;
+//        else
+//            globalCount = 0;
+//
+//        map = board;
+//
+//        bfs(0, 0, board.length, board);
+//        answer = min;
+//        return answer;
+//    }
+//
+//    public static void main(String[] args) {
+//       // int[][] board = {{0,0,0,0,0,0,0,1},{0,0,0,0,0,0,0,0},{0,0,0,0,0,1,0,0},{0,0,0,0,1,0,0,0},{0,0,0,1,0,0,0,1},{0,0,1,0,0,0,1,0},
+//               // {0,1,0,0,0,1,0,0},{1,0,0,0,0,0,0,0}};
+//        //int[][] board = {{0,0,0}, {0,0,0}, {0,0,0}};
+//
+//        int[][] board = {{0, 0, 1, 0}, {0, 0, 0, 0}, {0, 1, 0, 1}, {1, 0, 0, 0}};
+//        System.out.println(solution(board));
+//    }
+//}

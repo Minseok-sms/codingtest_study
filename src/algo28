@@ -1,0 +1,46 @@
+//import java.io.BufferedReader;
+//import java.io.IOException;
+//import java.io.InputStreamReader;
+//import java.util.ArrayList;
+//import java.util.StringTokenizer;
+//
+//
+//
+//public class algo28 {
+//
+//    static ArrayList<int[][]> array = new ArrayList<>();
+//    static ArrayList<boolean[][]> visited = new ArrayList<>();
+//
+//    public static void main(String[] args) throws IOException {
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in))
+//        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+//        int C = Integer.parseInt(st.nextToken());
+//        int R = Integer.parseInt(st.nextToken());
+//        int H = Integer.parseInt(st.nextToken());
+//
+//        int[][] map = new int[R][C];
+//        for(int i = 0; i < H ; i++){
+//            for(int j = 0 ; j < R; j++){
+//                st = new StringTokenizer(br.readLine(), " ");
+//                for(int k = 0 ; k < C; k++){
+//                    map[i][j] = Integer.parseInt(st.nextToken());
+//                }
+//            }
+//            array.add(map);
+//        }
+//
+//        for(int i = 0 ; i < H ; i++)
+//            visited.add(new boolean[R][C]);
+//
+//        for(int i = 0; i < H ; i++){
+//            for(int j = 0 ; j < R; j++){
+//                for(int k = 0 ; k < C; k++){
+//
+//                }
+//            }
+//        }
+//
+//
+//
+//    }
+//}
