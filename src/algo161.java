@@ -5,6 +5,10 @@ import java.util.*;
 
 public class algo161 {
 
+    /*
+    백준 : 16236
+    아기상어
+     */
     static int[][] map;
     static int N;
     static int sharkSize = 2;

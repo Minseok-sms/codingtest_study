@@ -1,45 +1,67 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class algo162 {
 
-    static class Node{
-        int row;
-        int col;
-        int time;
-        Node(int row, int col, int time){
-            this.row = row;
-            this.col = col;
-            this.time = time;
-        }
-    }
-    public static void main(String[] args) {
-        ArrayList<Node> array = new ArrayList<>();
+    /*
+    백준 : 1918
+    후위표기식 (다시)
+     */
 
-        array.add(new Node(2, 1, 1));
+    static HashMap<Character, Integer> map = new HashMap<>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str = br.readLine();
+        Stack<Character> stack = new Stack<>();
 
-        array.add(new Node(3, 1, 1));
-        array.add(new Node(3, 0, 1));
-        array.add(new Node(3, 0, 3));
-        array.add(new Node(4, 0, 3));
-        array.add(new Node(4, 1, 1));
+        map.put('+', 1);
+        map.put('-', 1);
+        map.put('*', 2);
+        map.put('/', 2);
 
-
-        Collections.sort(array, new Comparator<Node>() {
-            @Override
-            public int compare(Node o1, Node o2) {
-                if(o1.time > o2.time){
-                    return o1.time - o2.time;
-                }else if(o1.time == o2.time){
-                    if(o1.row == o2.row){
-                        return o1.col - o2.col;
-                    }else
-                        return o1.row - o2.row;
+        String answer = "";
+        boolean check = false;
+        for(int i = 0; i < str.length(); i++){
+            char temp = str.charAt(i);
+            //AB+C+DE/FG++HI/++
+            // +(/+
+            //A+B+C+(D/E+(F+G)+(H/I))
+            //AB+C+DE
+            //피연산자 일시 바로 출력
+            if('A' <= temp && temp <= 'Z')
+                answer += temp;
+            else if(map.containsKey(temp) && check == false){
+                // 연산자이고, 괄호진행안될때 자기보다 우선순위가 높거나 같은것들을 뺴고 자신을 스택에 담는다.
+                int size = stack.size();
+                for(int j = 0 ; j < size; j++){
+                    if(map.get(stack.peek()) >= map.get(temp)){
+                        answer += stack.pop();
+                    }
                 }
-                return -1;
+                stack.push(temp);
+            }else{
+                if(temp == ')'){
+                    while(true){
+                        char temp1 = stack.pop();
+                        if(temp1 == '(')
+                            break;
+                        answer += temp1;
+                    }
+                }else {
+                    check = true;
+                    stack.push(temp);
+                }
             }
-        });
-        System.out.println(array.get(0).row + " " + array.get(0).col + " " + array.get(0).time);
+        }
+        while(!stack.isEmpty())
+            answer += stack.pop();
+        System.out.println(answer);
+
     }
 }
+
+// ABC+*DE/-
+
+// -/
