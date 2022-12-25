@@ -110,5 +110,8 @@ public class algo163 {
 
         //다돌았는데 경우의 수가 없다
         System.out.println("NO");
+
+
+
     }
 }
