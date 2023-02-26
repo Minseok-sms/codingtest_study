@@ -36,6 +36,11 @@ public class algo71 {
                 return o1[2] - o2[2];
             }
         });
+        Arrays.sort(costs, new Comparator<int[]>(){
+            public int compare(int[] o1, int[] o2){
+                return 0;
+            }
+        });
         for(int i = 0; i < costs.length; i++){
             if(findParent(parent, costs[i][0]) != findParent(parent, costs[i][1])){
                 answer += costs[i][2];

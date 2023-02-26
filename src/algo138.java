@@ -59,8 +59,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class algo138 {
 
@@ -85,7 +84,13 @@ public class algo138 {
 //                return o2 - o1;
 //            }
 //        });
-
+        ArrayList<Integer> array = new ArrayList<>();
+        int[][] array2 = new int[2][3];
+        Arrays.sort(array2, new Comparator<int[]>(){
+            public int compare(int[] o1, int[] o2){
+                return o1[0] - o2[0];
+            }
+        });
 
 
         PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
