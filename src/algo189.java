@@ -13,6 +13,7 @@ public class algo189 {
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
 
+
         int[] array = new int[N];
         st = new StringTokenizer(br.readLine(), " ");
         for(int i = 0 ; i < N; i++)
